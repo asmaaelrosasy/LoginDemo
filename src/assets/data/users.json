@@ -1,0 +1,13 @@
+[{
+    "email": "admin@assessment.com",
+    "password": "admin@123",
+    "role": "admin",
+    "token": "admin12345"
+  },
+  {
+    "email": "user@assessment.com",
+    "password": "user@123",
+    "role": "user",
+    "token": "user12345"
+  }
+]
