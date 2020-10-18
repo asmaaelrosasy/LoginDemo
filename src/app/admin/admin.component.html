@@ -1,12 +1,30 @@
-<h2>My List</h2>
+<!-- Start Add Item by Admin -->
+<h3 *ngIf="userRole === 'admin'">Add New Item</h3>
+<form action="" class="form-inline" *ngIf="userRole === 'admin'">
+  <div class="form-group">
+    <input type="number" class="form-control" placeholder="id" #ItemId>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="name" #itemName>
+  </div>
+  <button class="btn btn-primary" (click)="onAdd(ItemId.value, itemName.value)">
+    add
+  </button>
+</form>
+<!-- End Add Item by Admin -->
+
+<!-- Start Item List View -->
+<h3>My List</h3>
 <ul class="items">
-  <li *ngFor="let item of items" [class.selected]="item === selectedItem"  [id]="item.id">
+  <li *ngFor="let item of items" [class.selected]="item === selectedItem" [id]="item.id">
     <span class="badge" (click)="onSelect(item)">{{item.id}}</span> {{item.name}}
-    <span class="badge2" (click)="onDelete(item.id)">Delete</span>
+    <span class="badge2" (click)="onDelete(item.id)" *ngIf="userRole === 'admin'">Delete</span>
   </li>
 </ul>
+<!-- End Item List View -->
 
-<div *ngIf="selectedItem">
+<!-- Start Edit Item by Admin -->
+<div *ngIf="selectedItem && userRole === 'admin'">
   <h2>{{selectedItem.name | uppercase}} Details</h2>
   <div><span>id: </span>{{selectedItem.id}}</div>
   <div>
@@ -15,3 +33,5 @@
     </label>
   </div>
 </div>
+<!-- End Edit Item by Admin -->
+

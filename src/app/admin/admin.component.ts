@@ -32,6 +32,11 @@ export class AdminComponent implements OnInit {
     this.selectedItem = item;
   }
 
+  onAdd(id: number, name: string): void {
+    if (!id || !name) { return; }
+    this.items.push({id, name});
+  }
+
   onDelete(id): void {
     document.getElementById(id).remove();
   }
