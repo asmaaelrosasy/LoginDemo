@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   error = '';
 
   constructor(private authenticationService: AuthenticationService,
-              private router: Router,
-              private formBuilder: FormBuilder) {
+    private router: Router,
+    private formBuilder: FormBuilder) {
     if (this.authenticationService.loggedIn) {
       this.router.navigate(['home']);
     }
@@ -53,7 +53,12 @@ export class LoginComponent implements OnInit {
     if (formData.email !== '' && formData.password !== '') {
       this.loading = true;
       if (this.authenticationService.login(formData.email, formData.password)) {
-        this.router.navigate(['home']);
+        const role = JSON.parse(localStorage.currentUser).role;
+        if (role === 'admin') {
+          this.router.navigate(['admin']);
+        } else if (role === 'user') {
+          this.router.navigate(['home']);
+        }
       } else {
         this.loading = false;
         this.error = 'Email or password is incorrect';

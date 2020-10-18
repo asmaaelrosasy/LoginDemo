@@ -27,9 +27,14 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  get isAdmin(): boolean {
+    return (localStorage.currentUser && JSON.parse(localStorage.currentUser).role === 'admin');
+  }
+
   logout(): void {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
+    this.getUser();
   }
 
 }
